@@ -1,0 +1,46 @@
+﻿@* @model List<ChatApp.Models.ChatMessage>
+
+<h1>Chat Room</h1>
+
+<div id="chat-messages">
+    @foreach (var message in Model)
+    {
+        <div>
+            <strong>@message.UserName:</strong> @message.Message
+            <br>
+            <span>@message.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")</span>
+        </div>
+    }
+</div>
+
+<form method="post" action="@Url.Action("SendMessage", "Chat")">
+    <input type="hidden" name="UserName" value="@User.Identity.Name" />
+    <input type="text" name="Message" placeholder="Type your message..." />
+    <button type="submit">Send</button>
+</form>
+
+ *@
+
+ @model List<ChatApp.Models.ChatMessage>
+
+<div class="container" style="background-color: rgba(70, 235, 147, 0.2); border-radius: 20px;">
+
+    <h1 class="text-center my-4">Vishnu's Chat Room</h1>
+    <hr />
+    <div id="chat-messages" class="overflow-auto mb-3 p-3 rounded" style="height: 400px;">
+        @foreach (var message in Model)
+        {
+            <div class="mb-2">
+                <strong>@message.UserName:</strong> @message.Message
+                <br>
+                <small class="text-muted">@message.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")</small>
+            </div>
+        }
+    </div>
+
+    <form method="post" action="@Url.Action("SendMessage", "Chat")" class="d-flex">
+        <input type="hidden" name="UserName" value="@User.Identity.Name" />
+        <input type="text" name="Message" placeholder="Type your message..." class="form-control me-2"  />
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
